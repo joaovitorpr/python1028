@@ -1,3 +1,4 @@
+'''
 def indice_menor(lista):
     indice = 0
     for i in range(len(lista)):
@@ -47,15 +48,17 @@ def Raiz_quadrada(num):
             ini = chute
     return chute
 
-def Raiz_binaria_recursiva(num):
-    ini = 0
-    fim = num
-    chute = (ini + fim)/ 2
+def Raiz_binaria_recursiva(num,ini,fim):
+    if fim == num:
+        ini = 0
+        fim = num
+    chute = (ini + fim) / 2
     if fim - ini > 0.001:
         if chute**2 > num:
             fim = chute
         else:
             ini = chute
+        chute = Raiz_binaria_recursiva(num,ini,fim)
     return chute
 
 def verifica_numero(msg):
@@ -72,6 +75,27 @@ def forca_opcao(msg,lista_opcao):
         escolha = input(f'{msg}\n{opcoes}\n->')
     return escolha
 
-lista = [5,3,1,8,4,7,6,2]
+lista = [5,3,1,8,4,7,10,6,2,9]
 print(lista)
+
+print(Raiz_binaria_recursiva(25,0,25))
+'''
+#quicksort
+
+def quicksort(lista):
+    if len(lista) < 2:
+        return lista
+    pivo = lista[0]
+    menores = [elem for elem in lista if elem < pivo]
+    maiores = [elem for elem in lista if elem > pivo]
+    '''print(menores, pivo, maiores)'''
+    menores_ordenados = quicksort(menores)
+    maiores_ordenados = quicksort(maiores)
+    return menores_ordenados + [pivo] + maiores_ordenados
+
+lista = [5,3,8,1,7,6,2,10,4,9]
+lista = quicksort(lista)
+print(lista)
+
+
 
